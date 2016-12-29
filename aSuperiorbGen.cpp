@@ -3,18 +3,21 @@
 #include <time.h>
 #include <math.h>
 
+#define MAX 500
+
 int main(int argc, char const *argv[])
 {
-	const int nbrModels = 5000, nbrIn = 1, nbrOut = 2;
+	const int nbrModels = 500000, nbrIn = 2, nbrOut = 2;
 	srand(time(NULL));
-	unsigned int n,i;
-	FILE* output = fopen("Superior5.txt", "w+");
+	unsigned int a,b,i;
+	FILE* output = fopen("data.txt", "w+");
 
 	fprintf(output, "%d %d %d\n\n", nbrModels, nbrIn, nbrOut);
 
 	for(i=0; i<nbrModels;i++) {
-		n=rand() % 11;
-		fprintf(output, "%d\n\n%d %d\n\n",n, (n<5), (n>=5));
+		a=rand() % MAX;
+		b=rand() % MAX;
+		fprintf(output, "%d %d\n\n%d %d\n\n",a,b, (a>b), (a<=5));
 
 	}
 	printf("done.\n");

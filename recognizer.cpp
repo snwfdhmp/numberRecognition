@@ -2,13 +2,23 @@
 #include <time.h>
 #include <math.h>
 
+#define NUMBERS_TO_GEN 2
+#define MAX 500
+
 int main(int argc, char const *argv[])
 {
 	srand(time(NULL));
 	struct fann *ann = fann_create_from_file("trained.net");
-	float number[1] = {rand() % 11};
-	float expected[2] = {0,1};
-	float *output = fann_run(ann, number);
-	printf("Nombre testé : %f\n<5 : %f\n>=5 : %f\n", number[0],output[0], output[1]);
+	int i;
+	float numbers[NUMBERS_TO_GEN];
+	printf("Nombres testés : \n");
+	for (i = 0; i < NUMBERS_TO_GEN; ++i)
+	{
+		numbers[i] = rand() % MAX;
+		printf("%f ", numbers[i]);
+	}
+
+	float *output = fann_run(ann, numbers);
+	printf("\na>b : %f\na <=b : %f\n", output[0], output[1]);
 	return 0;
 }
